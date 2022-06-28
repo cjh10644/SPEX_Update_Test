@@ -50,8 +50,8 @@ hold on
 loglog(t1,t1/10);
 loglog(t1,t1/100);
 loglog(t1,t3,'bo');
-xlabel("Time for direct LU factorization (sec)");
-ylabel("Time for LU update (sec)");
+xlabel("DLU (sec)");
+ylabel("LUU (sec)");
 legend('1x','1/10x','1/100x');
 
 %===================================================================
@@ -67,7 +67,7 @@ end
 minratio = 0;
 binsize = (maxratio-minratio)/numbin;
 bins = minratio:binsize:maxratio;
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(t1, t3, bins);
+[t1_avg, t3_avg,bin_center,bin_count] = compute_avr_per_bin(t1, t3, bins);
 
 figure(4);
 xlabel('time ratio for update/direct');
@@ -104,7 +104,7 @@ hold off
 numbin=200;
 binsize = (maxratio-minratio)/numbin;
 bins = minratio:binsize:maxratio;
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(t1, t3, bins);
+[t1_avg, t3_avg,bin_center,bin_count] = compute_avr_per_bin(t1, t3, bins);
 
 figure(6);
 xlabel('time ratio for update/direct');
@@ -151,7 +151,7 @@ end
 minratio = 0;
 binsize = (maxratio-minratio)/numbin;
 bins = minratio:binsize:maxratio;
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(nt1, nt3, bins);
+[t1_avg, t3_avg,bin_center,bin_count] = compute_avr_per_bin(nt1, nt3, bins);
 
 figure(8);
 xlabel('time ratio for update/direct');
@@ -188,7 +188,7 @@ hold off
 numbin=200;
 binsize = (maxratio-minratio)/numbin;
 bins = minratio:binsize:maxratio;
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(nt1, nt3, bins);
+[t1_avg, t3_avg,bin_center,bin_count] = compute_avr_per_bin(nt1, nt3, bins);
 
 figure(10);
 xlabel('time ratio for update/direct');
@@ -224,8 +224,9 @@ hold off
 
 ratio = t1./t3;
 [B, I]=sort(ratio);
-bins = [0,2,5,10,20,50,100,200,500];
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(t1, t3, bins);
+%bins = [1,2,5,10,20,50,100,200,500];
+bins=2.^(0:8);
+[t1_avg, t3_avg,bin_center,bin_count] = compute_avr_per_bin(t1, t3, bins);
 
 figure(14);
 xlabel('time ratio for update/direct');
@@ -244,33 +245,39 @@ set(gca, "XScale", "log")
 hold off
 
 figure(15);
-xlabel('time ratio for update/direct');
+xticks(10.^(0: 3) );
+xlabel('time ratio for t_{DLU}/t_{LUU}');
 yyaxis left
 semilogy(bin_center,t3_avg, 'b-o');
+ylim([10^-2, 10^6]);
 hold on;
 semilogy(bin_center,t1_avg, 'r-*');
-ylabel('run time');
+ylabel('average time (sec)');
 
 yyaxis right
 histogram(ratio,bins)
+%semilogy(bin_center,bin_count, 'y-+');
 ylabel('number of LP problems')
-legend('LU update','direct LU');
+legend('LUU','DLU');
 set(gca, "XScale", "log")
 
 hold off
+bin_count
 
 %===================================================================
-nt3=t3_all(t3_all~=0);
-nt1=t1_all(t3_all~=0);
+nt3=t3_all(t3_all.*t1_all~=0);
+nt1=t1_all(t3_all.*t1_all~=0);
 ratio = nt1./nt3;
 [B, I]=sort(ratio);
-bins = [0,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000];
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(nt1, nt3, bins);
+%bins = [0.05,0.1,0.2,0.5,1,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000];
+bins = 2.^(-4:15);
+[t1_avg, t3_avg,bin_center,bin_count] = compute_avr_per_bin(nt1, nt3, bins);
 
 figure(18);
 xlabel('time ratio for update/direct');
 yyaxis left
 semilogy(ratio(I),nt3(I), 'b-o');
+ylim([10^-2, 10^6]);
 hold on;
 semilogy(ratio(I),nt1(I), 'r-*');
 ylabel('run time');
@@ -284,17 +291,36 @@ set(gca, "XScale", "log")
 hold off
 
 figure(19);
-xlabel('time ratio for update/direct');
+xlim([10^-2, 10^5]);
+xticks(10.^(-2: 5) );
+xlabel('time ratio for t_{DLU}/t_{LUU}');
 yyaxis left
 semilogy(bin_center,t3_avg, 'b-o');
 hold on;
 semilogy(bin_center,t1_avg, 'r-*');
-ylabel('run time');
+ylabel('average time (sec)');
 
 yyaxis right
 histogram(ratio,bins)
-ylabel('number of updates/factorizations')
-
-legend('LU update','direct LU');
+ylabel('number of column replacements')
+legend('LUU','DLU');
 set(gca, "XScale", "log")
 hold off
+
+
+figure(2);
+%title('factorization/updating time over updating time');
+h=loglog(nt1,nt3,'bo');
+h.Annotation.LegendInformation.IconDisplayStyle = 'off';
+xlim([10^-2, 10^4]);
+ylim([10^-4, 10^4]);
+hold on
+loglog(nt1,nt1);
+loglog(nt1,nt1/10);
+loglog(nt1,nt1/100);
+xlabel("DLU (sec)");
+ylabel("LUU (sec)");
+legend('1x','1/10x','1/100x');
+
+%fix font size = 14 points
+%check expand axis to fill figure

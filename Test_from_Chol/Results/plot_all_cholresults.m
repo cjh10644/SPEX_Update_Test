@@ -72,6 +72,7 @@ semilogy(1:k,t_fact./t_update,'b-o');
 semilogy(1:k,t_update./t_update,'g-o');
 legend('t_{DLU}','t_{LUU}');
 
+
 figure(3);
 %title('factorization/updating time over updating time');
 loglog(t_fact,t_fact);
@@ -79,8 +80,8 @@ hold on
 loglog(t_fact,t_fact/10);
 loglog(t_fact,t_fact/100);
 loglog(t_fact,t_update,'bo');
-xlabel("Time for direct Cholesky factorization (sec)");
-ylabel("Time for Cholesky update/downdate (sec)");
+xlabel("DC (sec)");
+ylabel("CU (sec)");
 legend('1x','1/10x','1/100x');
 
 
@@ -103,7 +104,7 @@ end
 minratio = 0;
 binsize = (maxratio-minratio)/numbin;
 bins = minratio:binsize:maxratio;
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(t_fact, t_update, bins);
+[t1_avg, t3_avg,bin_center,~] = compute_avr_per_bin(t_fact, t_update, bins);
 
 figure(4);
 xlabel('time ratio for update/direct');
@@ -140,7 +141,7 @@ hold off
 numbin=200;
 binsize = (maxratio-minratio)/numbin;
 bins = minratio:binsize:maxratio;
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(t_fact, t_update, bins);
+[t1_avg, t3_avg,bin_center,~] = compute_avr_per_bin(t_fact, t_update, bins);
 
 figure(6);
 xlabel('time ratio for update/direct');
@@ -187,7 +188,7 @@ end
 minratio = 0;
 binsize = (maxratio-minratio)/numbin;
 bins = minratio:binsize:maxratio;
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(nt1, nt3, bins);
+[t1_avg, t3_avg,bin_center,~] = compute_avr_per_bin(nt1, nt3, bins);
 
 figure(8);
 xlabel('time ratio for update/direct');
@@ -224,7 +225,7 @@ hold off
 numbin=200;
 binsize = (maxratio-minratio)/numbin;
 bins = minratio:binsize:maxratio;
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(nt1, nt3, bins);
+[t1_avg, t3_avg,bin_center,~] = compute_avr_per_bin(nt1, nt3, bins);
 
 figure(10);
 xlabel('time ratio for update/direct');
@@ -258,55 +259,58 @@ hold off
 
 %**************************log bin**********************************
 
-t_fact=t_fact(t_update~=0);
-t_update=t_update(t_update~=0);
-ratio = t_fact./t_update;
+t1=t_fact(t_update.*t_fact~=0);
+t3=t_update(t_update.*t_fact~=0);
+ratio = t1./t3;
 [B, I]=sort(ratio);
 %bins = [0,3,10,30,100,300,1000,3000];
-bins = [0,2,5,10,20,50,100,200,500,1000,2000];
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(t_fact, t_update, bins);
+%bins = [1,2,5,10,20,50,100,200,500,1000,2000];
+bins=2.^(0:11);
+[t1_avg, t3_avg,bin_center,~] = compute_avr_per_bin(t1, t3, bins);
 
 figure(14);
 xlabel('time ratio for update/direct');
 yyaxis left
-h1=semilogy(ratio(I),t_update(I), 'b-o');
+h1=semilogy(ratio(I),t3(I), 'b-o');
 hold on;
-h2=semilogy(ratio(I),t_fact(I), 'r-*');
+h2=semilogy(ratio(I),t1(I), 'r-*');
 ylabel('run time');
 
 yyaxis right
 histogram(ratio,bins)
 ylabel('number of LP problems')
 legend('Cholesky update','direct Cholesky');
-set(gca, "XScale", "log")
-
+set(gca, "XScale", "log");
 hold off
 
 figure(15);
-xlabel('time ratio for update/direct');
+xticks(10.^(0: 4) );
+xlabel('time ratio for t_{DC}/t_{CU}');
 yyaxis left
 semilogy(bin_center,t3_avg, 'b-o');
+ylim([10^-2, 10^6]);
+yticks(10.^(-2: 2: 6));
 hold on;
 semilogy(bin_center,t1_avg, 'r-*');
-ylabel('run time');
+ylabel('average time (sec)');
 
 yyaxis right
 histogram(ratio,bins)
 ylabel('number of LP problems')
-legend('Cholesky update','direct Cholesky');
+legend('CU','DC');
 set(gca, "XScale", "log")
-
 hold off
 %===================================================================
-nt3=t_update_all(t_update_all~=0);
-nt1=t_fact_all(t_update_all~=0);
+nt3=t_update_all(t_update_all.*t_fact_all~=0);
+nt1=t_fact_all(t_update_all.*t_fact_all~=0);
 ratio = nt1./nt3;
 [B, I]=sort(ratio);
-bins = [0,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000];
-[t1_avg, t3_avg,bin_center] = compute_avr_per_bin(nt1, nt3, bins);
+%bins = [0.5,1,2,5,10,20,50,100,200,500,1000,2000,5000,10000,20000];
+bins = 2.^(-1:15);
+[t1_avg, t3_avg,bin_center,~] = compute_avr_per_bin(nt1, nt3, bins);
 
 figure(18);
-xlabel('time ratio for update/direct');
+xlabel('time ratio for t_{DC}/t_{CU}');
 yyaxis left
 semilogy(ratio(I),nt3(I), 'b-o');
 hold on;
@@ -315,24 +319,41 @@ ylabel('run time');
 
 yyaxis right
 histogram(ratio,bins)
-ylabel('number of updates/factorizations')
-legend('Cholesky update','direct Cholesky');
+ylabel('number of DC/CU')
+legend('t_{CU}','t_{DC}');
 set(gca, "XScale", "log")
 
 hold off
 
 figure(19);
-xlabel('time ratio for update/direct');
+xticks(10.^(-1: 5) );
+xlabel('time ratio for t_{DC}/t_{CU}');
 yyaxis left
 semilogy(bin_center,t3_avg, 'b-o');
+ylim([10^-2, 10^6]);
+yticks(10.^(-2: 2: 6));
 hold on;
 semilogy(bin_center,t1_avg, 'r-*');
-ylabel('run time');
+ylabel('average time (sec)');
 
 yyaxis right
 histogram(ratio,bins)
-ylabel('number of updates/factorizations')
-
-legend('Cholesky update','direct Cholesky');
+ylabel('number of rank-1 modifications')
+legend('CU','DC');
 set(gca, "XScale", "log")
 hold off
+
+
+figure(2);
+%title('factorization/updating time over updating time');
+loglog(nt1,nt1);
+hold on
+loglog(nt1,nt1/10);
+loglog(nt1,nt1/100);
+loglog(nt1,nt3,'bo');
+xlabel("DC (sec)");
+ylabel("CU (sec)");
+legend('1x','1/10x','1/100x');
+
+%fix font size = 14 points
+%check expand axis to fill figure
