@@ -1,0 +1,210 @@
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro.mtx
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro_b.mtx
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro_c.mtx
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro_lo.mtx
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro_hi.mtx
+m=27 n=51 fixed_var=0 nz=102 real_nnz=102
+Constructing initial basis...
+Size of triangular part is 27
+getting initial basic variables....
+OPT(5) FEAS(2) INFEAS(3) NOFEAS(4) UNBND(6) UNDEF(1)
+0: 2, obj: 0.000000
+preprocess finished
+obj value = 0.000000
+found 0!! This update won't improve obj value
+prev basis k(12): 12; new basis k: 35
+
+---------------------------------------------------------
+----------0: replacing k(12) with new_col(35)-----------
+-----------------------------------------------------------
+
+Solving 3 linear equations time: 	0.000185
+Search k and new_col time: 		0.000257
+
+	time     	L_nnz 	sum(Lb) 	U_nnz 		sum(Ub)
+
+LLU: 	0.000092 	30   	23428    	36   	28899
+LUU: 	0.000069 	31   	24807    	37   	30328
+LLU/LUU: 1.3333 	0.9677 	0.9444    	0.9730   	0.9529
+
+obj value = 0.000000
+found 0!! This update won't improve obj value
+prev basis k(13): 13; new basis k: 34
+
+---------------------------------------------------------
+----------1: replacing k(13) with new_col(34)-----------
+-----------------------------------------------------------
+
+Solving 3 linear equations time: 	0.000152
+Search k and new_col time: 		0.000227
+
+	time     	L_nnz 	sum(Lb) 	U_nnz 		sum(Ub)
+
+LLU: 	0.000094 	33   	26373    	36   	28287
+"LUU_lb": 0.000085 	32   	24646    	38   	29431
+LUU: 	0.000050 	32   	26289    	40   	32821
+LLU/LUU: 1.8800 	1.0312 	1.0032    	0.9000   	0.8619
+
+
+SPEX Left LU Factorization time: 	0.000094
+"lower bound" of SPEX LU Update time: 	0.000085
+SPEX LU Update time: 			0.000050
+
+
+time of Left LU/ time of update: 	1.880000
+
+obj value = 0.000000
+found 0!! This update won't improve obj value
+prev basis k(15): 15; new basis k: 19
+
+---------------------------------------------------------
+----------2: replacing k(15) with new_col(19)-----------
+-----------------------------------------------------------
+
+Solving 3 linear equations time: 	0.000175
+Search k and new_col time: 		0.000250
+
+	time     	L_nnz 	sum(Lb) 	U_nnz 		sum(Ub)
+
+LLU: 	0.000116 	36   	30209    	41   	32604
+"LUU_lb": 0.000083 	35   	27435    	37   	28339
+LUU: 	0.000036 	34   	27564    	41   	32874
+LLU/LUU: 3.2222 	1.0588 	1.0960    	1.0000   	0.9918
+
+
+SPEX Left LU Factorization time: 	0.000210
+"lower bound" of SPEX LU Update time: 	0.000168
+SPEX LU Update time: 			0.000086
+
+
+time of Left LU/ time of update: 	2.441860
+
+obj value = 0.000000
+prev basis k(6): 6; new basis k: 36
+
+---------------------------------------------------------
+----------3: replacing k(6) with new_col(36)-----------
+-----------------------------------------------------------
+
+Solving 3 linear equations time: 	0.000191
+Search k and new_col time: 		0.000268
+
+	time     	L_nnz 	sum(Lb) 	U_nnz 		sum(Ub)
+
+LLU: 	0.000119 	34   	27433    	43   	35645
+"LUU_lb": 0.000109 	41   	37311    	42   	35196
+LUU: 	0.000090 	34   	28565    	46   	39281
+LLU/LUU: 1.3222 	1.0000 	0.9604    	0.9348   	0.9074
+
+
+SPEX Left LU Factorization time: 	0.000329
+"lower bound" of SPEX LU Update time: 	0.000277
+SPEX LU Update time: 			0.000176
+
+
+time of Left LU/ time of update: 	1.869318
+
+obj value = -290.157300
+prev basis k(7): 7; new basis k: 47
+
+---------------------------------------------------------
+----------4: replacing k(7) with new_col(47)-----------
+-----------------------------------------------------------
+
+Solving 3 linear equations time: 	0.000199
+Search k and new_col time: 		0.000275
+
+	time     	L_nnz 	sum(Lb) 	U_nnz 		sum(Ub)
+
+LLU: 	0.000120 	33   	26430    	45   	36982
+"LUU_lb": 0.000126 	36   	30931    	43   	36599
+LUU: 	0.000090 	37   	32753    	46   	39656
+LLU/LUU: 1.3333 	0.8919 	0.8069    	0.9783   	0.9326
+
+
+SPEX Left LU Factorization time: 	0.000449
+"lower bound" of SPEX LU Update time: 	0.000403
+SPEX LU Update time: 			0.000266
+
+
+time of Left LU/ time of update: 	1.687970
+
+obj value = -455.961471
+found 0!! This update won't improve obj value
+prev basis k(1): 1; new basis k: 31
+
+---------------------------------------------------------
+----------5: replacing k(1) with new_col(31)-----------
+-----------------------------------------------------------
+
+Solving 3 linear equations time: 	0.000239
+Search k and new_col time: 		0.000322
+
+	time     	L_nnz 	sum(Lb) 	U_nnz 		sum(Ub)
+
+LLU: 	0.000133 	34   	26811    	47   	38052
+"LUU_lb": 0.000087 	34   	26484    	45   	36982
+LUU: 	0.000045 	38   	32854    	46   	39656
+LLU/LUU: 2.9556 	0.8947 	0.8161    	1.0217   	0.9596
+
+
+SPEX Left LU Factorization time: 	0.000582
+"lower bound" of SPEX LU Update time: 	0.000490
+SPEX LU Update time: 			0.000311
+
+
+time of Left LU/ time of update: 	1.871383
+
+obj value = -455.961471
+found 0!! This update won't improve obj value
+prev basis k(14): 39; new basis k: 20
+
+---------------------------------------------------------
+----------6: replacing k(14) with new_col(20)-----------
+-----------------------------------------------------------
+
+Solving 3 linear equations time: 	0.000292
+Search k and new_col time: 		0.000377
+
+	time     	L_nnz 	sum(Lb) 	U_nnz 		sum(Ub)
+
+LLU: 	0.000125 	34   	26546    	46   	37547
+"LUU_lb": 0.000075 	34   	26816    	44   	36250
+LUU: 	0.000035 	38   	32864    	45   	37915
+LLU/LUU: 3.5714 	0.8947 	0.8078    	1.0222   	0.9903
+
+
+SPEX Left LU Factorization time: 	0.000707
+"lower bound" of SPEX LU Update time: 	0.000565
+SPEX LU Update time: 			0.000346
+
+
+time of Left LU/ time of update: 	2.043353
+
+obj value = -455.961471
+prev basis k(0): 0; new basis k: 23
+
+---------------------------------------------------------
+----------7: replacing k(0) with new_col(23)-----------
+-----------------------------------------------------------
+
+Solving 3 linear equations time: 	0.000290
+Search k and new_col time: 		0.000388
+
+	time     	L_nnz 	sum(Lb) 	U_nnz 		sum(Ub)
+
+LLU: 	0.000112 	31   	23790    	49   	39163
+"LUU_lb": 0.000134 	39   	33301    	50   	41162
+LUU: 	0.000107 	42   	38295    	49   	41962
+LLU/LUU: 1.0467 	0.7381 	0.6212    	1.0000   	0.9333
+
+
+SPEX Left LU Factorization time: 	0.000819
+"lower bound" of SPEX LU Update time: 	0.000699
+SPEX LU Update time: 			0.000453
+
+
+time of Left LU/ time of update: 	1.807947
+
+obj value = -464.753143
+optimal solution found!

@@ -1,0 +1,40 @@
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro.mtx
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro_b.mtx
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro_c.mtx
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro_lo.mtx
+reading file TestMats/LPnetlib/lp_afiro/lp_afiro_hi.mtx
+m=27 n=51 fixed_var=0 nz=102 real_nnz=102
+getting initial basic variables....
+Constructing initial basis...
+Size of triangular part is 27
+set of basic variables found, now computing A=B*B^T....
+time to compute BB^T: 0.000065
+compute initial Cholesky factorization for A....
+computing Cholesky rank-1 update if col 14 is added to B...
+computing updated Cholesky using direct factorization...
+test succeeded!!
+		 time 		L_nnz 	sum(Lb)
+Factorization: 	0.000242 	40 	69755
+rank-1 Update: 	0.000087 	40 	69755
+
+computing Cholesky rank-1 update if col 19 is added to B...
+computing updated Cholesky using direct factorization...
+test succeeded!!
+		 time 		L_nnz 	sum(Lb)
+Factorization: 	0.000332 	46 	79906
+rank-1 Update: 	0.000152 	47 	75768
+
+computing Cholesky rank-1 update if col 19 is removed from B...
+computing updated Cholesky using direct factorization...
+test succeeded!!
+		 time 		L_nnz 	sum(Lb)
+Factorization: 	0.000242 	40 	69755
+rank-1 Update: 	0.000112 	47 	69762
+
+computing Cholesky rank-1 update if col 14 is removed from B...
+computing updated Cholesky using direct factorization...
+test succeeded!!
+		 time 		L_nnz 	sum(Lb)
+Factorization: 	0.000181 	40 	69747
+rank-1 Update: 	0.000034 	47 	69754
+

@@ -1,0 +1,40 @@
+reading file TestMats/LPnetlib/lp_ship08s/lp_ship08s.mtx
+reading file TestMats/LPnetlib/lp_ship08s/lp_ship08s_b.mtx
+reading file TestMats/LPnetlib/lp_ship08s/lp_ship08s_c.mtx
+reading file TestMats/LPnetlib/lp_ship08s/lp_ship08s_lo.mtx
+reading file TestMats/LPnetlib/lp_ship08s/lp_ship08s_hi.mtx
+m=778 n=2467 fixed_var=0 nz=7194 real_nnz=7194
+getting initial basic variables....
+Constructing initial basis...
+Size of triangular part is 704
+set of basic variables found, now computing A=B*B^T....
+time to compute BB^T: 0.001829
+compute initial Cholesky factorization for A....
+computing Cholesky rank-1 update if col 13 is added to B...
+computing updated Cholesky using direct factorization...
+test succeeded!!
+		 time 		L_nnz 	sum(Lb)
+Factorization: 	20.631990 	5835 	280686219
+rank-1 Update: 	0.361042 	5835 	280686219
+
+computing Cholesky rank-1 update if col 80 is added to B...
+computing updated Cholesky using direct factorization...
+test succeeded!!
+		 time 		L_nnz 	sum(Lb)
+Factorization: 	19.593663 	5715 	271807712
+rank-1 Update: 	0.812092 	5927 	286820820
+
+computing Cholesky rank-1 update if col 80 is removed from B...
+computing updated Cholesky using direct factorization...
+test succeeded!!
+		 time 		L_nnz 	sum(Lb)
+Factorization: 	20.631990 	5835 	280686219
+rank-1 Update: 	0.824975 	5927 	280686311
+
+computing Cholesky rank-1 update if col 13 is removed from B...
+computing updated Cholesky using direct factorization...
+test succeeded!!
+		 time 		L_nnz 	sum(Lb)
+Factorization: 	20.487529 	5835 	280685825
+rank-1 Update: 	0.348988 	5927 	280685917
+
