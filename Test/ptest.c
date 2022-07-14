@@ -692,7 +692,10 @@ int main( int argc, char* argv[])
         printf("prev basis k(%ld): %ld; new basis k: %ld\n",
             k, basis[k]-n, new_col);
         used_as_basis[new_col] = k;
-        used_as_basis[basis[k]-n] = -1;
+        if (basis[k] >= n)
+        {
+            used_as_basis[basis[k]-n] = -1;
+        }
         basis[k] = new_col+n;
         printf("\n---------------------------------------------------------\n");
         printf("----------%ld: replacing k(%ld) with new_col(%ld)-----------\n",
