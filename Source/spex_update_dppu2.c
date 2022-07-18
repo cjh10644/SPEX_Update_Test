@@ -336,6 +336,7 @@ SPEX_info spex_update_dppu2
         // other entries in row tmp_ks are up-to-date (i.e., maintained as
         // >=-1)
         h[Qks] = SPEX_UNFLIP(h[Qks]);
+        last_nz_b4_ks = h[Qks];
     }
     else
     {
