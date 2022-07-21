@@ -159,10 +159,6 @@ int main( int argc, char* argv[])
         FREE_WORKSPACE;
         return 0;
     }
-    for (j = 0; j < nvars; j++)
-    {
-        used_as_basis[j] = -1;
-    }
 
     printf("getting initial basic variables....\n");
     parm.msg_lev = GLP_MSG_OFF;
@@ -297,7 +293,6 @@ int main( int argc, char* argv[])
                 {
                     printf("x[%ld]=%f\n",j,glp_get_col_prim(LP,j+1));
                 }
-                used_as_basis[j] = i;
                 nz = Prob_A->p[j+1]-Prob_A->p[j];
                 if (A2->v[i]->nzmax < nz)
                 {
@@ -457,6 +452,15 @@ int main( int argc, char* argv[])
     //--------------------------------------------------------------------------
     // generate initial inputs for LU update
     //--------------------------------------------------------------------------
+    for (j = 0; j < nvars; j++)
+    {
+        used_as_basis[j] = -1;
+    }
+    for (i = 0; i < n; i++)
+    {
+        j = basis[i];
+        if (j >= n)       used_as_basis[j-n] = i;
+    }
     // allocate space for vk
     OK(SPEX_matrix_allocate(&vk, SPEX_DYNAMIC_CSC, SPEX_MPZ, n, 1, 0, false,
         true, option));
